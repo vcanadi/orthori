@@ -1,0 +1,37 @@
+name:               orthori
+version:            0.1.0.0
+license:            NONE
+author:             Vito Canadi
+maintainer:         vito.canadi@gmail.com
+extra-source-files: CHANGELOG.md
+synopsis:           Design square bar constructions
+
+default-extensions:
+  - LambdaCase
+  - OverloadedStrings
+  - DefaultSignatures
+  - ScopedTypeVariables
+  - TypeApplications
+  - DeriveGeneric
+
+dependencies:
+  - base
+  - containers
+
+library:
+  source-dirs: src
+
+tests:
+  spec:
+    build-depends:
+    - base
+    - hspec
+    - orthori
+    main: Spec.hs
+    source-dirs: spec
+version: 0.1.0.0
+
+executable:
+  main: Main.hs
+  dependencites: [ base ]
+  source-dirs: [ ., src, app]

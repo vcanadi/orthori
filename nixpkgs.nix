@@ -8,4 +8,18 @@ let
       sha256 = "sha256:062320xxpi3q70hl5mx8hzyzj1brvwgr34r7qxdai5wj9sk27r59";
     }) ;
   # local = import <nixpkgs>;
-in nixpkgs {}
+
+  # Config to inport external packages
+  config.packageOverrides = pkgs: rec { haskellPackages =
+    let mkDerivation = expr: pkgs.haskellPackages.mkDerivation (expr // {
+          enableSeparateDocOutput = true;
+          doHaddock = true;
+          doCheck = true;
+        });
+    in
+    pkgs.haskellPackages.override { overrides = hpkgs: opkgs:{
+         data-cmd = import ./local/data-cmd/default.nix { inherit pkgs hpkgs mkDerivation; };
+      };
+    };
+  };
+in nixpkgs { inherit config; }
