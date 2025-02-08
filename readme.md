@@ -1,5 +1,6 @@
 ## Title
-Description
+Simple, mostly 3d, low-level utilities.
+3d vector type (P3), rotations (Quaternion), discrete orthogonal rotations (Ori), simple CAS symbolic language (Sy) for parameterized values
 
 ### Development
 
@@ -9,6 +10,7 @@ nix-shell --arg withHLS true
 ```
 
 ### Utility
+Use
 
 ### Usage
 
