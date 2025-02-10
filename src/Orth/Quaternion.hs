@@ -3,6 +3,9 @@ module Orth.Quaternion where
 import GHC.Generics (Generic)
 import Orth.P3
 
+{- Simple quaternion implementation for represendint any 3d rotation
+-}
+
 data Quat n = Quat { quatS :: n, quatV :: P3 n } deriving (Show, Eq, Generic)
 
 qMul :: Num n => Quat n -> Quat n -> Quat n

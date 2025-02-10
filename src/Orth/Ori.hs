@@ -33,7 +33,7 @@ instance Num B3 where (+) = enumAdd; (*) = enumMul; abs = id; signum = enumSignu
 b2ToB3 :: B2 -> B3
 b2ToB3 = toEnum . fromEnum
 
--- | Orientation plane (bivector Ori invariant to 90 rotations, and Turn between forward and up)
+-- | Orientation plane where both forward and up lie. 0 - XZ, 1 - YZ, 2 - ZY
 newtype Plane = Plane B3
   deriving (Show, Eq, Read, Enum, Bounded, Num, Generic)
 
@@ -49,18 +49,19 @@ isB32 :: B3 -> B2
 isB32 B32 = B21
 isB32 _   = B20
 
--- | Rotation direction e.g. in XZ plane from x to z or z to x
+-- | Rotation direction e.g. in XZ plane. 0 - from x to z or 1 - from z to x
 newtype Turn = Turn B2 deriving (Show, Eq, Read, Enum, Bounded, Num, Generic)
 
--- | Direction in which forward vector is pointing
+-- | Direction in which forward vector is pointing. 0 - positive side of axis, 1 - negative side of axis
 newtype Forw = Forw B2 deriving (Show, Eq, Read, Enum, Bounded, Num, Generic)
 
--- | Direction in which up vector is pointing
+-- | Direction in which up vector is pointing. 0 - positive side of axis, 1 - negative side of axis
 newtype Up = Up B2 deriving (Show, Eq, Read, Enum, Bounded, Generic)
 
--- | Factorized Orientation for easier calculation (Plane (3) * Turn (2) * Forward(2) * Up (2) = Ori (24) )
+-- | Factorized Orientation that represents any 90 deg. looking direction (Plane (3) * Turn (2) * Forward(2) * Up (2) = Ori (24) )
 data Ori = Ori { foP :: Plane, foT :: Turn, foF :: Forw, foU :: Up } deriving (Show, Eq, Read, Generic)
 
+-- | Patterns for easier referencing of the exact orientation (Oab, a - a forward direction, b - up direction, directions: F,B,U,D,L,R )
 pattern OFU, OUB, ODF, OBD, OUF, OFD, OBU, ODB, OLF, OFR, OBL
       , ORB, OFL, OLB, ORF, OBR, OUL, OLD, ORU, ODR, OLU, OUR, ODL, ORD :: Ori
 pattern OFU = Ori (Plane B30) (Turn B20) (Forw B20) (Up B20)

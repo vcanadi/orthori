@@ -10,10 +10,5 @@ nix-shell --arg withHLS true
 ```
 
 ### Utility
-Use
 
-### Usage
-
-### Examples
-
-### How it works
+Lightweight 3d library
